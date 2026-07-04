@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="MEBridge\MEBridge.csproj" />
+  <Project Path="MEBridge.Tests/MEBridge.Tests.csproj" />
+</Solution>
