@@ -22,6 +22,6 @@ public class NeitherTypeMapped_Tests
             mapper.BridgeTo<NeitherMapped_B>(a, null));
 
         Assert.Contains("not mapped", ex.Message);
-        Assert.Contains("MapAttribute", ex.Message);
+        Assert.Contains("BridgeAttribute", ex.Message);
     }
 }

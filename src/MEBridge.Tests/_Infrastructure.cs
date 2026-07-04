@@ -30,8 +30,7 @@ public static class TestHelpers
     public static ServiceProvider CreateServiceProvider(IBridgeConfiguration? config = null)
     {
         var services = new ServiceCollection();
-        if (config is not null)
-            services.AddSingleton<IBridgeConfiguration>(config);
+        services.AddSingleton<IBridgeConfiguration>(config ?? new BridgeConfiguration());
         return services.BuildServiceProvider();
     }
 
