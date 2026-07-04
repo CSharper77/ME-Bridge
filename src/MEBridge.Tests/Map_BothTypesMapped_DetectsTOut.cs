@@ -2,7 +2,7 @@ using MEBridge.Attributes;
 
 namespace MEBridge.Tests;
 
-[Map<BothMapped_Entity>]
+[Bridge<BothMapped_Entity>]
 public class BothMapped_Model
 {
     public string Value { get; set; } = null!;

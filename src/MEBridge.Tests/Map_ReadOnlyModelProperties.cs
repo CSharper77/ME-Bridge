@@ -8,7 +8,7 @@ public class ReadOnly_Entity
     public int Age { get; set; }
 }
 
-[Map<ReadOnly_Entity>]
+[Bridge<ReadOnly_Entity>]
 public class ReadOnly_Model
 {
     public string Name { get; set; } = null!;

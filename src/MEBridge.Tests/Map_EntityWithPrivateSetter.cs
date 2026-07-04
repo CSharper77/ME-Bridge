@@ -10,7 +10,7 @@ public class PrivSet_Entity
     public int Computed { get; private set; }
 }
 
-[Map<PrivSet_Entity>]
+[Bridge<PrivSet_Entity>]
 public class PrivSet_Model
 {
     public string Name { get; set; } = null!;

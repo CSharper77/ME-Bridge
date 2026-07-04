@@ -10,7 +10,7 @@ public class DiffEnum_Entity
     public Map_SourceEnum Status { get; set; }
 }
 
-[Map<DiffEnum_Entity>]
+[Bridge<DiffEnum_Entity>]
 public class DiffEnum_Model
 {
     public Map_TargetEnum Status { get; set; }

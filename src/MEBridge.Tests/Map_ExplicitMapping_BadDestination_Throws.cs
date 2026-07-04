@@ -7,10 +7,10 @@ public class BadDest_Entity
     public string Name { get; set; } = null!;
 }
 
-[Map<BadDest_Entity>]
+[Bridge<BadDest_Entity>]
 public class BadDest_Model
 {
-    [MapProperty("NonExistent")]
+    [BridgeProperty("NonExistent")]
     public string Value { get; set; } = null!;
 }
 

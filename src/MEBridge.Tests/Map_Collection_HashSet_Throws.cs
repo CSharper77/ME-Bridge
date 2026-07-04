@@ -7,7 +7,7 @@ public class HashSetColl_InnerEntity
     public string Name { get; set; } = null!;
 }
 
-[Map<HashSetColl_InnerEntity>]
+[Bridge<HashSetColl_InnerEntity>]
 public class HashSetColl_InnerModel
 {
     public string Name { get; set; } = null!;
@@ -19,11 +19,11 @@ public class HashSetColl_OuterEntity
     public HashSet<HashSetColl_InnerEntity> Items { get; set; } = null!;
 }
 
-[Map<HashSetColl_OuterEntity>]
+[Bridge<HashSetColl_OuterEntity>]
 public class HashSetColl_OuterModel
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Items")]
+    [BridgeProperty("Items")]
     public HashSet<HashSetColl_InnerModel> Items { get; set; } = null!;
 }
 

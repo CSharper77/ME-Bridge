@@ -8,11 +8,11 @@ public class SimpleEnumColl_Entity
     public IEnumerable<string> Names { get; set; } = null!;
 }
 
-[Map<SimpleEnumColl_Entity>]
+[Bridge<SimpleEnumColl_Entity>]
 public class SimpleEnumColl_Model
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Names")]
+    [BridgeProperty("Names")]
     public IEnumerable<string> Names { get; set; } = null!;
 }
 

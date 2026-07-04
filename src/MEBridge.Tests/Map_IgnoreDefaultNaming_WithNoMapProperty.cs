@@ -8,7 +8,7 @@ public class IgnNoMap_Entity
     public string Second { get; set; } = null!;
 }
 
-[Map<IgnNoMap_Entity>(true)]
+[Bridge<IgnNoMap_Entity>(true)]
 public class IgnNoMap_Model
 {
     public string First { get; set; } = null!;

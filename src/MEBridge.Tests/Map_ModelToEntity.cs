@@ -13,7 +13,7 @@ public class Person
     public DateTime CreatedAt { get; set; }
 }
 
-[Map<Person>]
+[Bridge<Person>]
 public class PersonModel
 {
     public int Id { get; set; }

@@ -8,11 +8,11 @@ public class DictColl_Entity
     public Dictionary<string, string> Items { get; set; } = null!;
 }
 
-[Map<DictColl_Entity>]
+[Bridge<DictColl_Entity>]
 public class DictColl_Model
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Items")]
+    [BridgeProperty("Items")]
     public Dictionary<string, string> Items { get; set; } = null!;
 }
 

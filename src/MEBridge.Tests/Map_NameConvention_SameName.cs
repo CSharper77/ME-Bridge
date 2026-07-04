@@ -8,7 +8,7 @@ public class NameConv_Entity
     public string LastName { get; set; } = null!;
 }
 
-[Map<NameConv_Entity>]
+[Bridge<NameConv_Entity>]
 public class NameConv_Model
 {
     public string FirstName { get; set; } = null!;

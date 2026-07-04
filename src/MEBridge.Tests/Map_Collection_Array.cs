@@ -7,7 +7,7 @@ public class CollArr_InnerEntity
     public string Name { get; set; } = null!;
 }
 
-[Map<CollArr_InnerEntity>]
+[Bridge<CollArr_InnerEntity>]
 public class CollArr_InnerModel
 {
     public string Name { get; set; } = null!;
@@ -19,11 +19,11 @@ public class CollArr_OuterEntity
     public CollArr_InnerEntity[] Items { get; set; } = null!;
 }
 
-[Map<CollArr_OuterEntity>]
+[Bridge<CollArr_OuterEntity>]
 public class CollArr_OuterModel
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Items")]
+    [BridgeProperty("Items")]
     public CollArr_InnerModel[] Items { get; set; } = null!;
 }
 

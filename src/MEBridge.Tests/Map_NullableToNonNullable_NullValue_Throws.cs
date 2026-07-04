@@ -7,7 +7,7 @@ public class NtoNNNull_Entity
     public int? NullableInt { get; set; }
 }
 
-[Map<NtoNNNull_Entity>]
+[Bridge<NtoNNNull_Entity>]
 public class NtoNNNull_Model
 {
     public int NullableInt { get; set; }

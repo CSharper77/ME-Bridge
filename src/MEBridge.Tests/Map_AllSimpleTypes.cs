@@ -17,7 +17,7 @@ public class SimpleTypes_Entity
     public Guid GuidProp { get; set; }
 }
 
-[Map<SimpleTypes_Entity>]
+[Bridge<SimpleTypes_Entity>]
 public class SimpleTypes_Model
 {
     public string StringProp { get; set; } = null!;

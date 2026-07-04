@@ -7,7 +7,7 @@ public class WriteOnly_Entity
     public string Name { get; set; } = "ignored";
 }
 
-[Map<WriteOnly_Entity>]
+[Bridge<WriteOnly_Entity>]
 public class WriteOnly_Model
 {
     private string _name = null!;

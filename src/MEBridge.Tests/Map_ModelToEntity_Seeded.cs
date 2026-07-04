@@ -17,7 +17,7 @@ public class LineItem
     public decimal UnitPrice { get; set; }
 }
 
-[Map<Invoice>]
+[Bridge<Invoice>]
 public class InvoiceModel
 {
     public int Id { get; set; }
@@ -25,7 +25,7 @@ public class InvoiceModel
     public List<LineItemModel> Items { get; set; } = new();
 }
 
-[Map<LineItem>]
+[Bridge<LineItem>]
 public class LineItemModel
 {
     public int Id { get; set; }

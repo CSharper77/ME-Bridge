@@ -19,25 +19,25 @@ public class Deep_RootEntity
     public Deep_ChildEntity Child { get; set; } = null!;
 }
 
-[Map<Deep_GrandchildEntity>]
+[Bridge<Deep_GrandchildEntity>]
 public class Deep_GrandchildModel
 {
     public string Value { get; set; } = null!;
 }
 
-[Map<Deep_ChildEntity>]
+[Bridge<Deep_ChildEntity>]
 public class Deep_ChildModel
 {
     public string Name { get; set; } = null!;
-    [MapProperty("Grandchild")]
+    [BridgeProperty("Grandchild")]
     public Deep_GrandchildModel Grandchild { get; set; } = null!;
 }
 
-[Map<Deep_RootEntity>]
+[Bridge<Deep_RootEntity>]
 public class Deep_RootModel
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Child")]
+    [BridgeProperty("Child")]
     public Deep_ChildModel Child { get; set; } = null!;
 }
 

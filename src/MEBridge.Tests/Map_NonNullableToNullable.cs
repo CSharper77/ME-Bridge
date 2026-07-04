@@ -11,7 +11,7 @@ public class NNtoN_Entity
     public Guid GuidProp { get; set; }
 }
 
-[Map<NNtoN_Entity>]
+[Bridge<NNtoN_Entity>]
 public class NNtoN_Model
 {
     public int? IntProp { get; set; }

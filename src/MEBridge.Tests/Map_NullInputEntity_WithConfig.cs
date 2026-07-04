@@ -7,7 +7,7 @@ public class NullWithCfg_Entity
     public string Name { get; set; } = null!;
 }
 
-[Map<NullWithCfg_Entity>]
+[Bridge<NullWithCfg_Entity>]
 public class NullWithCfg_Model
 {
     public string Name { get; set; } = null!;

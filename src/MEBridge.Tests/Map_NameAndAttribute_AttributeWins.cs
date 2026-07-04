@@ -7,10 +7,10 @@ public class BothWays_Entity
     public string Source { get; set; } = null!;
 }
 
-[Map<BothWays_Entity>]
+[Bridge<BothWays_Entity>]
 public class BothWays_Model
 {
-    [MapProperty("Source")]
+    [BridgeProperty("Source")]
     public string Source { get; set; } = null!;
 }
 

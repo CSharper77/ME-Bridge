@@ -2,7 +2,7 @@ using MEBridge.Attributes;
 
 namespace MEBridge.Tests;
 
-[Map<ModelToModel_B>]
+[Bridge<ModelToModel_B>]
 public class ModelToModel_A
 {
     public string Name { get; set; } = null!;
@@ -10,7 +10,7 @@ public class ModelToModel_A
     public string Email { get; set; } = null!;
 }
 
-[Map<ModelToModel_A>]
+[Bridge<ModelToModel_A>]
 public class ModelToModel_B
 {
     public string Name { get; set; } = null!;

@@ -7,7 +7,7 @@ public class DefFact_Entity
     public string Name { get; set; } = "from-entity";
 }
 
-[Map<DefFact_Entity>]
+[Bridge<DefFact_Entity>]
 public class DefFact_Model
 {
     public string Name { get; set; } = null!;

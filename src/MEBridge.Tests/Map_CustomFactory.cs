@@ -7,7 +7,7 @@ public class CustFact_Entity
     public string Name { get; set; } = null!;
 }
 
-[Map<CustFact_Entity>]
+[Bridge<CustFact_Entity>]
 public class CustFact_Model
 {
     public string Name { get; set; } = null!;

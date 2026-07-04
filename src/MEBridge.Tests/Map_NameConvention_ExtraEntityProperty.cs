@@ -8,7 +8,7 @@ public class ExtraEntityProp_Entity
     public string Hidden { get; set; } = null!;
 }
 
-[Map<ExtraEntityProp_Entity>]
+[Bridge<ExtraEntityProp_Entity>]
 public class ExtraEntityProp_Model
 {
     public string Name { get; set; } = null!;

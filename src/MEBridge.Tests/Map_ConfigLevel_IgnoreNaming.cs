@@ -7,7 +7,7 @@ public class CfgIgn_Entity
     public string First { get; set; } = null!;
 }
 
-[Map<CfgIgn_Entity>]
+[Bridge<CfgIgn_Entity>]
 public class CfgIgn_Model
 {
     public string First { get; set; } = null!;

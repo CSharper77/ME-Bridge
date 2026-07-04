@@ -8,7 +8,7 @@ public class Nested_InnerEntity
     public int Value { get; set; }
 }
 
-[Map<Nested_InnerEntity>]
+[Bridge<Nested_InnerEntity>]
 public class Nested_InnerModel
 {
     public string Name { get; set; } = null!;
@@ -21,11 +21,11 @@ public class Nested_OuterEntity
     public Nested_InnerEntity Inner { get; set; } = null!;
 }
 
-[Map<Nested_OuterEntity>]
+[Bridge<Nested_OuterEntity>]
 public class Nested_OuterModel
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Inner")]
+    [BridgeProperty("Inner")]
     public Nested_InnerModel Inner { get; set; } = null!;
 }
 

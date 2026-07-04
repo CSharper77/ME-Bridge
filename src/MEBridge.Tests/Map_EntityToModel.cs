@@ -12,7 +12,7 @@ public class EntityToModel_Source
     public DateTime CreatedAt { get; set; }
 }
 
-[Map<EntityToModel_Source>]
+[Bridge<EntityToModel_Source>]
 public class EntityToModel_Target
 {
     public string FirstName { get; set; } = null!;

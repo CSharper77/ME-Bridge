@@ -7,7 +7,7 @@ public class NoMapProp_InnerEntity
     public string Name { get; set; } = null!;
 }
 
-[Map<NoMapProp_InnerEntity>]
+[Bridge<NoMapProp_InnerEntity>]
 public class NoMapProp_InnerModel
 {
     public string Name { get; set; } = null!;
@@ -19,7 +19,7 @@ public class NoMapProp_OuterEntity
     public NoMapProp_InnerEntity Inner { get; set; } = null!;
 }
 
-[Map<NoMapProp_OuterEntity>]
+[Bridge<NoMapProp_OuterEntity>]
 public class NoMapProp_OuterModel
 {
     public string Title { get; set; } = null!;

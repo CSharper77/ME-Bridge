@@ -8,7 +8,7 @@ public class Unchanged_Entity
     public int Age { get; set; }
 }
 
-[Map<Unchanged_Entity>]
+[Bridge<Unchanged_Entity>]
 public class Unchanged_Model
 {
     public string Name { get; set; } = null!;

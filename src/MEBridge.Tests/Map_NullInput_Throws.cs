@@ -7,7 +7,7 @@ public class NullInput_Entity
     public string Name { get; set; } = null!;
 }
 
-[Map<NullInput_Entity>]
+[Bridge<NullInput_Entity>]
 public class NullInput_Model
 {
     public string Name { get; set; } = null!;

@@ -8,11 +8,11 @@ public class SimpleArr_Entity
     public string[] Names { get; set; } = null!;
 }
 
-[Map<SimpleArr_Entity>]
+[Bridge<SimpleArr_Entity>]
 public class SimpleArr_Model
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Names")]
+    [BridgeProperty("Names")]
     public string[] Names { get; set; } = null!;
 }
 

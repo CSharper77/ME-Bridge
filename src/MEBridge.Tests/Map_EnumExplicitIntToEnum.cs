@@ -9,10 +9,10 @@ public class IntEnum_Entity
     public int StatusCode { get; set; }
 }
 
-[Map<IntEnum_Entity>]
+[Bridge<IntEnum_Entity>]
 public class IntEnum_Model
 {
-    [MapProperty("StatusCode")]
+    [BridgeProperty("StatusCode")]
     public Map_ExplicitEnum StatusCode { get; set; }
 }
 

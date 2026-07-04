@@ -9,7 +9,7 @@ public class Address
     public int Age { get; set; }
 }
 
-[Map<Address>]
+[Bridge<Address>]
 public class AddressModel
 {
     public int Id { get; set; }

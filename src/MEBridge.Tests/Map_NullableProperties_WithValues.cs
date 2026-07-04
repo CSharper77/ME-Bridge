@@ -12,7 +12,7 @@ public class NullableValues_Entity
     public Guid? NullableGuid { get; set; }
 }
 
-[Map<NullableValues_Entity>]
+[Bridge<NullableValues_Entity>]
 public class NullableValues_Model
 {
     public string StringProp { get; set; } = null!;

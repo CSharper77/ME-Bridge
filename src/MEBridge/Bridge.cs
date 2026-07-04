@@ -4,6 +4,7 @@ using MEBridge.Attributes;
 
 namespace MEBridge;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Reflectify;
 using Reflectify.Models;
 using System.Collections.Concurrent;
@@ -12,7 +13,7 @@ using System.Collections.Concurrent;
 public class Bridge 
 {
     /// <summary>Optional mapping configuration for custom behavior.</summary>
-    public IBridgeConfiguration MappingConfiguration { get; }
+    public IBridgeConfiguration BridgeConfiguration { get; }
     /// <summary>Reflection service for type and attribute inspection.</summary>
     public IReflectify Reflectify { get; }
     /// <summary>Service provider for resolving dependencies.</summary>
@@ -28,14 +29,14 @@ public class Bridge
     {
         Reflectify = reflectify;
         ServiceProvider = serviceProvider;
-        MappingConfiguration = (IBridgeConfiguration?)serviceProvider.GetService(typeof(IBridgeConfiguration));
+        BridgeConfiguration = serviceProvider.GetRequiredService<IBridgeConfiguration>();
     }
     
     /// <summary>Creates a model instance using the configured factory or Activator.</summary>
     private TOut CreateModelInstance<TOut>()
     {
-        if (MappingConfiguration is not null)
-            return MappingConfiguration.CreateModelInstance<TOut>();
+        if (BridgeConfiguration is not null)
+            return BridgeConfiguration.CreateModelInstance<TOut>();
         
         return Activator.CreateInstance<TOut>();
     }
@@ -53,10 +54,10 @@ public class Bridge
         var types = GetModelAndEntityTypes(inputType, typeof(TOutput));
         var entityType = types.EntityType;
         var modelType = types.ModelType;
-        var modelMappingAttribute = Reflectify.GetTypeInfo(modelType).GetAttribute<MapAttribute>();
+        var modelMappingAttribute = Reflectify.GetTypeInfo(modelType).GetAttribute<BridgeAttribute>();
         
         if (modelMappingAttribute is null)
-            throw new Exception($"The model of type {modelType} is not mapped, use the '{nameof(MapAttribute)}'.");
+            throw new Exception($"The model of type {modelType} is not mapped, use the '{nameof(BridgeAttribute)}'.");
 
         InitializeDictionary(modelType, entityType, modelMappingAttribute);
 
@@ -72,14 +73,14 @@ public class Bridge
 
         await MapTypes(input, output, modelType, context);
 
-        if(MappingConfiguration is not null)
-            await MappingConfiguration.AfterBridge(input, output, ServiceProvider);
+        if(BridgeConfiguration is not null)
+            await BridgeConfiguration.AfterBridge(input, output, ServiceProvider);
 
         return output;
     }
 
     /// <summary>Builds the bidirectional property mapping dictionary between model and entity types using name convention and attributes.</summary>
-    private void InitializeDictionary(Type modelType, Type entityType, MapAttribute modelMappingAttribute)
+    private void InitializeDictionary(Type modelType, Type entityType, BridgeAttribute modelMappingAttribute)
     {
         if(InitializedTypes.TryGetValue(modelType, out var value) && value == entityType)
             return;
@@ -110,7 +111,7 @@ public class Bridge
                 PropertiesMappingDictionary.TryAdd(entityProperty, extendedModelProp.PropertyInfo);
             }
 
-            var modelPropertyAttribute = extendedModelProp.GetAttribute<MapPropertyAttribute>();
+            var modelPropertyAttribute = extendedModelProp.GetAttribute<BridgePropertyAttribute>();
 
             // using attribute
             if(modelPropertyAttribute is not null && !string.IsNullOrWhiteSpace(modelPropertyAttribute.Destination))
@@ -136,15 +137,15 @@ public class Bridge
     }
 
     /// <summary>Returns true if the property should skip name-convention mapping based on attribute or configuration settings.</summary>
-    private bool ShouldIgnorePropertyNamingConventionMapping(MapAttribute modelMappingAttribute,  ExtendedPropertyInfo extendedModelProp)
+    private bool ShouldIgnorePropertyNamingConventionMapping(BridgeAttribute modelMappingAttribute,  ExtendedPropertyInfo extendedModelProp)
     {
-        if (extendedModelProp.GetAttribute<MapPropertyAttribute>() is MapPropertyAttribute propertyMapAttr && propertyMapAttr.IgnoreDefaultNamingMap)
+        if (extendedModelProp.GetAttribute<BridgePropertyAttribute>() is BridgePropertyAttribute propertyMapAttr && propertyMapAttr.IgnoreDefaultNamingMap)
             return true;
 
         if (modelMappingAttribute.IgnoreDefaultNamingMap)
             return true;
 
-        if (MappingConfiguration is not null && MappingConfiguration.IgnoreDefaultNamingMap)
+        if (BridgeConfiguration is not null && BridgeConfiguration.IgnoreDefaultNamingMap)
             return true;
 
         return false;
@@ -158,20 +159,20 @@ public class Bridge
         Type? entityType = null;
         
         var classInInfo = Reflectify.GetTypeInfo(typeIn);
-        if (classInInfo.GetAttribute<MapAttribute>() is not null)
+        if (classInInfo.GetAttribute<BridgeAttribute>() is not null)
         {
             modelType = typeIn;
             entityType = typeOut;
         }
         
         var classOutInfo = Reflectify.GetTypeInfo(typeOut);
-        if (classOutInfo.GetAttribute<MapAttribute>() is not null)
+        if (classOutInfo.GetAttribute<BridgeAttribute>() is not null)
         {
             modelType = typeOut;
             entityType = typeIn;
         }
         if(modelType is null || entityType is null)
-            throw new Exception($"The types {typeIn}/{typeOut} are not mapped, no class declare [{nameof(MapAttribute)}]");
+            throw new Exception($"The types {typeIn}/{typeOut} are not mapped, no class declare [{nameof(BridgeAttribute)}]");
         
         return (modelType, entityType);
     }
@@ -179,7 +180,7 @@ public class Bridge
     /// <summary>Iterates output properties and copies values from input, recursively handling nested and collection types.</summary>
     private async Task MapTypes<TOutput>(object input, TOutput output, Type modelType, DbContext? context) where TOutput : class
     {
-        var typeMapAttribute = Reflectify.GetTypeInfo(modelType).GetAttribute<MapAttribute>();
+        var typeMapAttribute = Reflectify.GetTypeInfo(modelType).GetAttribute<BridgeAttribute>();
         var outputProperties = Reflectify.GetProperties(typeof(TOutput));
         if (outputProperties is null || outputProperties.Count == 0)
             return;
@@ -227,12 +228,12 @@ public class Bridge
 
                             object? entityInstance = null;
                             var elementType = GetCollectionElementType(outPropertyInfo.PropertyType);
-                            if (typeof(TOutput) != modelType && MappingConfiguration is not null)
+                            if (typeof(TOutput) != modelType && BridgeConfiguration is not null)
                             {
                                 var entitiesList = (IList?)outPropertyInfo.GetValue(output);
-                                var modelPrimaryKeyProperty = Reflectify.GetProperty(item.GetType(), MappingConfiguration.ModelPrimaryKeyPropertyName);
+                                var modelPrimaryKeyProperty = Reflectify.GetProperty(item.GetType(), BridgeConfiguration.ModelPrimaryKeyPropertyName);
                                 var modelPrimaryKey = modelPrimaryKeyProperty?.PropertyInfo.GetValue(item);
-                                var entityPrimaryKeyProperty = Reflectify.GetProperty(elementType, MappingConfiguration.PrimaryKeyPropertyName);
+                                var entityPrimaryKeyProperty = Reflectify.GetProperty(elementType, BridgeConfiguration.PrimaryKeyPropertyName);
                                 entityInstance = entitiesList?.Cast<object>().FirstOrDefault(w=> entityPrimaryKeyProperty?.PropertyInfo.GetValue(w) is object obj && obj.Equals(modelPrimaryKey));
                             }
 
@@ -332,9 +333,9 @@ public class Bridge
         where TEntity : class 
     {
         var modelType = model.GetType();
-        if (MappingConfiguration is not null)
+        if (BridgeConfiguration is not null)
         {
-            var configured = await MappingConfiguration.GetOrCreateEntity<TEntity>(ServiceProvider, model);
+            var configured = await BridgeConfiguration.GetOrCreateEntity<TEntity>(ServiceProvider, model);
             if (configured is not null)
                 return configured;
         }
@@ -343,7 +344,7 @@ public class Bridge
             return Activator.CreateInstance<TEntity>();
 
         var pkName = GetEntityPrimaryKeyName(typeof(TEntity), context);
-        var modelPkName = MappingConfiguration?.PrimaryKeyPropertyName ?? pkName;
+        var modelPkName = BridgeConfiguration?.PrimaryKeyPropertyName ?? pkName;
         var pkProp = Reflectify.GetProperty(modelType, modelPkName)?.PropertyInfo;
         var pkValue = pkProp?.GetValue(model);
 
@@ -372,7 +373,7 @@ public class Bridge
 
         foreach (var prop in modelProps)
         {
-            var attr = prop.GetAttribute<MapPropertyAttribute>();
+            var attr = prop.GetAttribute<BridgePropertyAttribute>();
             var entityPropName = attr?.Destination ?? prop.PropertyInfo.Name;
 
             var entityProp = Reflectify.GetProperty(entityType, entityPropName)?.PropertyInfo;

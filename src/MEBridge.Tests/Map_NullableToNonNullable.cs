@@ -11,7 +11,7 @@ public class NtoNN_Entity
     public Guid? NullableGuid { get; set; }
 }
 
-[Map<NtoNN_Entity>]
+[Bridge<NtoNN_Entity>]
 public class NtoNN_Model
 {
     public int NullableInt { get; set; }

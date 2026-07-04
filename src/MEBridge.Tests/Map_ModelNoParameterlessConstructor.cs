@@ -7,7 +7,7 @@ public class NoCtor_Entity
     public string Name { get; set; } = null!;
 }
 
-[Map<NoCtor_Entity>]
+[Bridge<NoCtor_Entity>]
 public class NoCtor_Model
 {
     public NoCtor_Model(string name) { Name = name; }

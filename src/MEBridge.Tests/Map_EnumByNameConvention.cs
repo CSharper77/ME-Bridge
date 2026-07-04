@@ -9,7 +9,7 @@ public class EnumConv_Entity
     public Map_EnumStatus Status { get; set; }
 }
 
-[Map<EnumConv_Entity>]
+[Bridge<EnumConv_Entity>]
 public class EnumConv_Model
 {
     public Map_EnumStatus Status { get; set; }

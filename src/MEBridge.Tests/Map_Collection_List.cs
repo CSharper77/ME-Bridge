@@ -7,7 +7,7 @@ public class CollList_InnerEntity
     public string Name { get; set; } = null!;
 }
 
-[Map<CollList_InnerEntity>]
+[Bridge<CollList_InnerEntity>]
 public class CollList_InnerModel
 {
     public string Name { get; set; } = null!;
@@ -19,11 +19,11 @@ public class CollList_OuterEntity
     public List<CollList_InnerEntity> Items { get; set; } = null!;
 }
 
-[Map<CollList_OuterEntity>]
+[Bridge<CollList_OuterEntity>]
 public class CollList_OuterModel
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Items")]
+    [BridgeProperty("Items")]
     public List<CollList_InnerModel> Items { get; set; } = null!;
 }
 

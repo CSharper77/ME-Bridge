@@ -7,7 +7,7 @@ public class EmptyModel_Entity
     public string Name { get; set; } = null!;
 }
 
-[Map<EmptyModel_Entity>]
+[Bridge<EmptyModel_Entity>]
 public class EmptyModel_Model { }
 
 public class ModelWithNoProperties_Tests

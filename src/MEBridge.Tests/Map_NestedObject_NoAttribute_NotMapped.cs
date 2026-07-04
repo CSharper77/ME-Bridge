@@ -15,11 +15,11 @@ public class NoAttrNest_OuterEntity
     public NoAttrNest_InnerEntity Inner { get; set; } = null!;
 }
 
-[Map<NoAttrNest_OuterEntity>]
+[Bridge<NoAttrNest_OuterEntity>]
 public class NoAttrNest_OuterModel
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Inner")]
+    [BridgeProperty("Inner")]
     public NoAttrNest_InnerModel Inner { get; set; } = null!;
 }
 

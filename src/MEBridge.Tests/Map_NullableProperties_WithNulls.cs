@@ -11,7 +11,7 @@ public class NullableNulls_Entity
     public Guid? NullableGuid { get; set; }
 }
 
-[Map<NullableNulls_Entity>]
+[Bridge<NullableNulls_Entity>]
 public class NullableNulls_Model
 {
     public int? NullableInt { get; set; }

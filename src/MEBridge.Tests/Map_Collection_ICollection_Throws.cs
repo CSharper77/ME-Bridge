@@ -7,7 +7,7 @@ public class IColl_InnerEntity
     public string Name { get; set; } = null!;
 }
 
-[Map<IColl_InnerEntity>]
+[Bridge<IColl_InnerEntity>]
 public class IColl_InnerModel
 {
     public string Name { get; set; } = null!;
@@ -19,11 +19,11 @@ public class IColl_OuterEntity
     public ICollection<IColl_InnerEntity> Items { get; set; } = null!;
 }
 
-[Map<IColl_OuterEntity>]
+[Bridge<IColl_OuterEntity>]
 public class IColl_OuterModel
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Items")]
+    [BridgeProperty("Items")]
     public ICollection<IColl_InnerModel> Items { get; set; } = null!;
 }
 

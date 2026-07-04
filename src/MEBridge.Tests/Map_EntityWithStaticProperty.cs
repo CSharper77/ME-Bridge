@@ -8,7 +8,7 @@ public class StaticProp_Entity
     public static string StaticValue { get; set; } = "static-entity";
 }
 
-[Map<StaticProp_Entity>]
+[Bridge<StaticProp_Entity>]
 public class StaticProp_Model
 {
     public string Name { get; set; } = null!;

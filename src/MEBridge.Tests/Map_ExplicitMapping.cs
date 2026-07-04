@@ -7,10 +7,10 @@ public class ExplicitMap_Entity
     public string First { get; set; } = null!;
 }
 
-[Map<ExplicitMap_Entity>]
+[Bridge<ExplicitMap_Entity>]
 public class ExplicitMap_Model
 {
-    [MapProperty("First")]
+    [BridgeProperty("First")]
     public string Second { get; set; } = null!;
 }
 

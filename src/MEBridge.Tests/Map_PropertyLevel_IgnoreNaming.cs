@@ -8,13 +8,13 @@ public class PropIgn_Entity
     public string LastName { get; set; } = null!;
 }
 
-[Map<PropIgn_Entity>(true)]
+[Bridge<PropIgn_Entity>(true)]
 public class PropIgn_Model
 {
-    [MapProperty("FirstName")]
+    [BridgeProperty("FirstName")]
     public string FirstName { get; set; } = null!;
 
-    [MapProperty("LastName")]
+    [BridgeProperty("LastName")]
     public string LastName { get; set; } = null!;
 }
 
@@ -40,10 +40,10 @@ public class PropNameIgn_Entity
     public string ShouldIgnore { get; set; } = null!;
 }
 
-[Map<PropNameIgn_Entity>]
+[Bridge<PropNameIgn_Entity>]
 public class PropNameIgn_Model
 {
-    [MapProperty("", ignoreDefaultNamingMap: true)]
+    [BridgeProperty("", ignoreDefaultNamingMap: true)]
     public string ShouldIgnore { get; set; } = null!;
 }
 

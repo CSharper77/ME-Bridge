@@ -12,7 +12,7 @@ public class Inherit_DerivedEntity : Inherit_BaseEntity
     public string DerivedName { get; set; } = null!;
 }
 
-[Map<Inherit_DerivedEntity>]
+[Bridge<Inherit_DerivedEntity>]
 public class Inherit_Model
 {
     public string BaseName { get; set; } = null!;

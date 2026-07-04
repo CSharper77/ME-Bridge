@@ -8,7 +8,7 @@ public class Customer
     public string Name { get; set; } = null!;
 }
 
-[Map<Customer>]
+[Bridge<Customer>]
 public class CustomerModel
 {
     public int Id { get; set; }

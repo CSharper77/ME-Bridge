@@ -7,7 +7,7 @@ public class IgnNameFalse_Entity
     public string Name { get; set; } = null!;
 }
 
-[Map<IgnNameFalse_Entity>(false)]
+[Bridge<IgnNameFalse_Entity>(false)]
 public class IgnNameFalse_Model
 {
     public string Name { get; set; } = null!;

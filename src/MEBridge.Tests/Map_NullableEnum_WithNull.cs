@@ -9,7 +9,7 @@ public class NullEnumNull_Entity
     public Map_NullEnum? Status { get; set; }
 }
 
-[Map<NullEnumNull_Entity>]
+[Bridge<NullEnumNull_Entity>]
 public class NullEnumNull_Model
 {
     public Map_NullEnum? Status { get; set; }

@@ -8,11 +8,11 @@ public class SimpleList_Entity
     public List<string> Names { get; set; } = null!;
 }
 
-[Map<SimpleList_Entity>]
+[Bridge<SimpleList_Entity>]
 public class SimpleList_Model
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Names")]
+    [BridgeProperty("Names")]
     public List<string> Names { get; set; } = null!;
 }
 

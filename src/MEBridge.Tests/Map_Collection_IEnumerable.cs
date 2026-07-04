@@ -7,7 +7,7 @@ public class CollEnum_InnerEntity
     public string Name { get; set; } = null!;
 }
 
-[Map<CollEnum_InnerEntity>]
+[Bridge<CollEnum_InnerEntity>]
 public class CollEnum_InnerModel
 {
     public string Name { get; set; } = null!;
@@ -19,11 +19,11 @@ public class CollEnum_OuterEntity
     public IEnumerable<CollEnum_InnerEntity> Items { get; set; } = null!;
 }
 
-[Map<CollEnum_OuterEntity>]
+[Bridge<CollEnum_OuterEntity>]
 public class CollEnum_OuterModel
 {
     public string Title { get; set; } = null!;
-    [MapProperty("Items")]
+    [BridgeProperty("Items")]
     public IEnumerable<CollEnum_InnerModel> Items { get; set; } = null!;
 }
 

@@ -7,13 +7,13 @@ public class MultiModel_Entity
     public string Shared { get; set; } = null!;
 }
 
-[Map<MultiModel_Entity>]
+[Bridge<MultiModel_Entity>]
 public class MultiModel_A
 {
     public string Shared { get; set; } = null!;
 }
 
-[Map<MultiModel_Entity>]
+[Bridge<MultiModel_Entity>]
 public class MultiModel_B
 {
     public string Shared { get; set; } = null!;

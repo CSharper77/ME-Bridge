@@ -7,12 +7,12 @@ public class IgnNameTrue_Entity
     public string First { get; set; } = null!;
 }
 
-[Map<IgnNameTrue_Entity>(true)]
+[Bridge<IgnNameTrue_Entity>(true)]
 public class IgnNameTrue_Model
 {
     public string NotFirst { get; set; } = null!;
 
-    [MapProperty("First")]
+    [BridgeProperty("First")]
     public string First { get; set; } = null!;
 }
 

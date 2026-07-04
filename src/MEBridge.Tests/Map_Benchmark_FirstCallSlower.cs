@@ -107,7 +107,7 @@ public class BenchBig_Entity
     public string Prop099 { get; set; } = null!;
 }
 
-[Map<BenchBig_Entity>]
+[Bridge<BenchBig_Entity>]
 public class BenchBig_Model
 {
     public string Prop000 { get; set; } = null!;
@@ -217,7 +217,7 @@ public class BenchWarmup_E
     public string A { get; set; } = null!;
 }
 
-[Map<BenchWarmup_E>]
+[Bridge<BenchWarmup_E>]
 public class BenchWarmup_M
 {
     public string A { get; set; } = null!;
