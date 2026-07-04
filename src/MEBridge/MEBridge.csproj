@@ -10,13 +10,17 @@
         <Description>Model to Entity and Entity to Model mapping library</Description>
         <Copyright></Copyright>
         <PackageProjectUrl>https://github.com/CSharper77/ME-Bridge</PackageProjectUrl>
-        <PackageReadmeFile>Readme.md</PackageReadmeFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>Mapper; mapping; model to entity; entity to model</PackageTags>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
 
     <ItemGroup>
       <None Include="..\..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+      <None Include="..\..\README.md">
         <Pack>True</Pack>
         <PackagePath>\</PackagePath>
       </None>

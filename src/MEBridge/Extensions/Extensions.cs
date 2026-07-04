@@ -8,7 +8,7 @@ namespace MEBridge.Extensions;
 public static class Extensions
 {
     /// <summary>Registers <see cref="IReflection"/>, <see cref="IBridgeConfiguration"/> (optional), and <see cref="Bridge"/> as singletons.</summary>
-    public static void AddMapper(this IServiceCollection services, IBridgeConfiguration? mappingConfiguration = null)
+    public static void AddModelToEntityBridge(this IServiceCollection services, IBridgeConfiguration mappingConfiguration)
     {
         services.AddReflectify(e =>
         {
@@ -16,8 +16,7 @@ public static class Extensions
             e.LifeTime = Reflectify.Models.LifeTime.Singleton;
         });
 
-        if (mappingConfiguration is not null)
-            services.AddSingleton<IBridgeConfiguration>(mappingConfiguration);
+        services.AddSingleton<IBridgeConfiguration>(mappingConfiguration);
 
         services.AddSingleton<Bridge>();
     }
